@@ -75,6 +75,15 @@ public class MainUI extends JFrame implements ActionListener {
 
 		// Set window title
 		super("Crypto Trading Tool");
+		
+		// set new text file: clear contents
+		try {
+			new FileWriter("brokerNames.txt", false).close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
 		// Set top bar
 
