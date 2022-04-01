@@ -5,11 +5,21 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -208,12 +218,97 @@ public class MainUI extends JFrame implements ActionListener {
 			DataVisualizationCreator creator = new DataVisualizationCreator();
 			creator.createCharts();
 		} else if ("addTableRow".equals(command)) {
-			dtm.addRow(new String[3]);
+			
+			// get broker name
+			int rowNum = dtm.getRowCount() - 1;
+			Object traderObject = dtm.getValueAt(rowNum, 0);
+			
+			String brokerName = traderObject.toString();
+//			System.out.println("brokername: " + brokerName);
+			// read through list in text file to make sure this name does not yet exist
+			if (verifyUniqueBroker(brokerName)) {
+				dtm.addRow(new String[3]);
+				writeBroker(brokerName);
+				
+			} else {
+				JOptionPane.showMessageDialog(this, "Broker name already exists, enter a new one!");
+			}
+			
 		} else if ("remTableRow".equals(command)) {
 			int selectedRow = table.getSelectedRow();
+			
+			// remove brokerName of row from txt file
+			Object traderObject = dtm.getValueAt(selectedRow, 0);
+			String brokerName = traderObject.toString();
+			
+			removeBroker(brokerName);
+			
 			if (selectedRow != -1)
 				dtm.removeRow(selectedRow);
 		}
 	}
-
+	
+	private boolean verifyUniqueBroker(String brokerName) {
+//		System.out.println("verifying entered");
+		boolean uniqueBroker = true;
+		try {
+			Scanner brokerNames = new Scanner(new File("brokerNames.txt"));
+			while (brokerNames.hasNextLine()) {
+				String broker = brokerNames.nextLine();
+//				System.out.println(broker);
+				
+				if (broker.equals(brokerName)) {
+					uniqueBroker = false;
+//					System.out.println("broker already exists: " + broker);
+					break;
+				} 
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return uniqueBroker;
+	}
+	
+	private static void writeBroker(String brokerName) {
+//		System.out.println("writeBroker entered");
+		try {
+		    FileWriter brokerList = new FileWriter("brokerNames.txt",true); 
+		    brokerList.write( brokerName + "\n");//appends the string to the file
+		    brokerList.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void removeBroker(String brokerName) {
+		
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter("brokerNames.txt"));
+			
+		    String brokerLine;
+		    InputStream readingFile = new FileInputStream("brokerNames.txt");
+			BufferedReader br = new BufferedReader(new InputStreamReader(readingFile));
+			
+			// ISSUE: FOR SOME REASON, ALL ITEAMS OF BROKER NAMES GETS DELETED
+			while ((brokerLine = br.readLine()) != null) { // no empty lines
+				String broker = brokerLine;
+				if(broker.equals(brokerName)) {
+					brokerLine = ""; //replace with empty line					
+			    } else {
+			    	brokerLine = broker;
+			    }
+				
+			    bw.close();
+			    br.close();
+			    
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		
+	}
+	
 }
