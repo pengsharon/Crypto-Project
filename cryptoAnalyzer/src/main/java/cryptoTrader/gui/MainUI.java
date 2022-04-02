@@ -10,6 +10,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -264,8 +265,9 @@ public class MainUI extends JFrame implements ActionListener {
 			// remove brokerName of row from txt file
 			Object traderObject = dtm.getValueAt(selectedRow, 0);
 			String brokerName = traderObject.toString();
+			File f = new File("brokerNames.txt");
 			
-			removeBroker(brokerName);
+			removeBroker(brokerName, f);
 			
 			if (selectedRow != -1)
 				dtm.removeRow(selectedRow);
@@ -305,35 +307,66 @@ public class MainUI extends JFrame implements ActionListener {
 		}
 	}
 	
-	private static void removeBroker(String brokerName) {
-		
-		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter("brokerNames.txt"));
-			
-		    String brokerLine;
-		    InputStream readingFile = new FileInputStream("brokerNames.txt");
-			BufferedReader br = new BufferedReader(new InputStreamReader(readingFile));
-			
-			// ISSUE: FOR SOME REASON, ALL ITEAMS OF BROKER NAMES GETS DELETED
-			while ((brokerLine = br.readLine()) != null) { // no empty lines
-				String broker = brokerLine;
-				if(broker.equals(brokerName)) {
-					brokerLine = ""; //replace with empty line	
-					break;
-			    } else {
-			    	brokerLine = broker;
-			    }
-				
-			    bw.close();
-			    br.close();
-			    
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		
-	}
+	private static void removeBroker(String brokerName, File f) {
+
+        try {
+            File tempFile = new File("temp.txt");
+
+            BufferedReader reader = new BufferedReader(new FileReader(f));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            String brokerLine;
+
+            while ((brokerLine = reader.readLine()) != null) {
+
+                // trim newline when comparing with lineToRemove
+                String trimmedLine = brokerLine.trim();
+
+                if (trimmedLine.equals(brokerName))
+                    continue;
+
+                writer.write(brokerLine + System.getProperty("line.separator"));
+            }
+
+            writer.close();
+            reader.close();
+
+            boolean successful = tempFile.renameTo(f);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+	
+//	private static void removeBroker(String brokerName) {
+//		
+//		try {
+//			BufferedWriter bw = new BufferedWriter(new FileWriter("brokerNames.txt"));
+//			
+//		    String brokerLine;
+//		    InputStream readingFile = new FileInputStream("brokerNames.txt");
+//			BufferedReader br = new BufferedReader(new InputStreamReader(readingFile));
+//			
+//			// ISSUE: FOR SOME REASON, ALL ITEAMS OF BROKER NAMES GETS DELETED
+//			while ((brokerLine = br.readLine()) != null) { // no empty lines
+//				String broker = brokerLine;
+//				if(broker.equals(brokerName)) {
+//					brokerLine = ""; //replace with empty line	
+//					break;
+//			    } else {
+//			    	brokerLine = broker;
+//			    }
+//				
+//			    bw.close();
+//			    br.close();
+//			    
+//				}
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//		
+//	}
 	
 }
