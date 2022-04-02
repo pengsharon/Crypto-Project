@@ -6,11 +6,11 @@ public class tradeSummary {
 	private String strategy;
 	private String coin;
 	private String action;
-	private int quantity;
-	private double price;
+	private String quantity;
+	private String price;
 	private LocalDate date = LocalDate.now();
 	
-	public tradeSummary (String traderName, String strategy, String coin, String action, int quantity, double price) {
+	public tradeSummary (String traderName, String strategy, String coin, String action, String quantity, String price) {
 		this.traderName = traderName;
 		this.strategy = strategy;
 		this.coin = coin;
@@ -35,11 +35,11 @@ public class tradeSummary {
 		return action;
 	}
 	
-	public int getQuantity() {
+	public String getQuantity() {
 		return quantity;
 	}
 	
-	public double getPrice() {
+	public String getPrice() {
 		return price;
 	}
 	

@@ -217,7 +217,6 @@ public class MainUI extends JFrame implements ActionListener {
 						return;
 					}
 					String traderName = traderObject.toString();
-//					rowInfo[0] = traderName;
 					Object coinObject = dtm.getValueAt(count, 1);
 					if (coinObject == null) {
 						JOptionPane.showMessageDialog(this, "please fill in cryptocoin list on line " + (count + 1) );
@@ -246,7 +245,55 @@ public class MainUI extends JFrame implements ActionListener {
 			System.out.println(combinedInfo[0].getStratName());
 			for(int i = 0; i < coinsToFetch.size(); i++) {
 				System.out.println(coinsToFetch.get(i));
-			}	
+			}
+			
+			// assuming we have a dict (hashmap) of coins and prices fetched. (coinDict)
+			
+			// iterating thru combinedInfo items, perform trades by broker
+			
+			// create an array storing trade Summaries
+			
+			ArrayList<tradeSummary> allTrades = new ArrayList<tradeSummary>();
+		
+			for (int i = 0; i < combinedInfo.length; i++) {
+				String[] coinsGiven = combinedInfo[i].getCoinList();
+				String strategyUsed = combinedInfo[i].getStratName();
+				String brokerName = combinedInfo[i].getBName();
+				
+				tradeSummary mySummary;
+				boolean isValid;
+				
+				
+				switch (strategyUsed) {
+					case "Strategy-A" :
+						StrategyA myStratA = new StrategyA(coinsGiven, brokerName);
+						isValid = myStratA.validate(coinsGiven, myStratA.getReqCoins());
+						mySummary = myStratA.performStrategyA(coinDict.get("BTC"), coinDict.get("ETH"), isValid);
+						break;
+					case "Strategy-B" :
+						StrategyB myStratB = new StrategyB(coinsGiven, brokerName);
+						isValid = myStratB.validate(coinsGiven, myStratB.getReqCoins());
+						mySummary = myStratB.performStrategyB(coinDict.get("ETH"), coinDict.get("DOGE"), isValid);
+						break;
+					case "Strategy-C" :
+						StrategyC myStratC = new StrategyC(coinsGiven, brokerName);
+						isValid = myStratC.validate(coinsGiven, myStratC.getReqCoins());
+						mySummary = myStratB.performStrategyC(coinDict.get("ADA"), coinDict.get("XRP"), isValid);
+						break;
+					case "Strategy-D" :
+						StrategyD myStratD = new StrategyD(coinsGiven, brokerName);
+						isValid = myStratD.validate(coinsGiven, myStratD.getReqCoins());
+						mySummary = myStratD.performStrategyD(coinDict.get("ADA"), coinDict.get("XRP"), isValid);
+						break;
+					default:
+						 mySummary = new tradeSummary("null", "null", "null", "fail", "null", "null");
+				}
+				
+				allTrades.add(mySummary);
+				
+			}
+			
+			
 			stats.removeAll();
 			DataVisualizationCreator creator = new DataVisualizationCreator();
 			creator.createCharts();

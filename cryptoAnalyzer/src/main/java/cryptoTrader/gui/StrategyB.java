@@ -10,31 +10,40 @@ public class StrategyB extends Strategy {
 		}
 	};
 	
-	public StrategyB(String[] givenCoins, String brokerName, boolean valid) {
+	public StrategyB(String[] givenCoins, String brokerName) {
 		super(givenCoins, brokerName);
 		this.valid = valid;
 		
 		// TODO Auto-generated constructor stub	
 	}
 	
-	private tradeSummary performStrategyB(double ethPrice, double dogePrice) {
+	private tradeSummary performStrategyB(double ethPrice, double dogePrice, boolean isValid) {
+		
 		String coin;
 		String action;
-		int quantity;
-		double price;
-		if(ethPrice > 1000*dogePrice) {
-			coin = "DOGE";
-			action = "Buy";
-			quantity = 100;
-			price = dogePrice;
+		String quantity;
+		String price;
+
+		if (isValid) {
+			
+			if(ethPrice > 1000*dogePrice) {
+				coin = "DOGE";
+				action = "Buy";
+				quantity = "100";
+				price = String.valueOf(dogePrice);
+			}
+			else {
+				coin = "DOGE";
+				action = "Sell";
+				quantity = "200";
+				price = String.valueOf(dogePrice);
+			}
+			tradeSummary summary = new tradeSummary(brokerName, strategy, coin, action, quantity, price);
+			return summary;
+		} else {
+			tradeSummary summary = new tradeSummary(brokerName, strategy, "null", "fail", "null", "null");
+			return summary;
 		}
-		else {
-			coin = "DOGE";
-			action = "Sell";
-			quantity = 200;
-			price = dogePrice;
-		}
-		tradeSummary summary = new tradeSummary(brokerName, strategy, coin, action, quantity, price);
-		return summary;
 	}
+
 }

@@ -50,14 +50,15 @@ public class LoginUI extends JFrame implements ActionListener {
 
 	// Should be a reference to a separate object in actual implementation
 
-
+	// singleton design
 	public static LoginUI getInstance() {
 		if (instance == null)
 			instance = new LoginUI();
 
 		return instance;
 	}
-
+	
+	
 	public LoginUI() {
 
 		// Set window title
@@ -97,7 +98,7 @@ public class LoginUI extends JFrame implements ActionListener {
 
 
 	public static void main(String[] args) {
-		JFrame frame = LoginUI.getInstance();
+		JFrame frame = LoginUI.getInstance(); //  singleton design for mainUI: get an instance of mainUI to start program
 		frame.setSize(800, 300);
 		frame.pack();
 		frame.setVisible(true);		
