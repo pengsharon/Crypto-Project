@@ -2,8 +2,8 @@ package cryptoTrader.gui;
 import java.util.ArrayList;
 public class Strategy {
 	private boolean valid;
-	private String[] givenCoins;
-	private String[] requiredCoins;
+	protected String[] givenCoins;
+	protected ArrayList<String> requiredCoins;
 	protected String brokerName;
 	
 	public Strategy(String[] givenCoins, String brokerName) {
@@ -11,7 +11,7 @@ public class Strategy {
 		this.brokerName = brokerName;
 	}
 	
-	private boolean validate(String[] givenCoins, ArrayList<String> requiredCoins) {
+	public boolean validate(String[] givenCoins, ArrayList<String> requiredCoins) {
 		boolean isValid = true; //Strategy-A, Strategy-B check
 		for(String i : requiredCoins) {
 			for (int j = 0; j < givenCoins.length; j++) {
@@ -25,5 +25,9 @@ public class Strategy {
 			}
 		}
 		return isValid;
+	}
+	
+	public ArrayList<String> getReqCoins() {
+		return requiredCoins;
 	}
 }

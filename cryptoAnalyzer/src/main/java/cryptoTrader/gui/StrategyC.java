@@ -10,31 +10,39 @@ public class StrategyC extends Strategy {
 		}
 	};
 	
-	public StrategyC(String[] givenCoins, String brokerName, boolean valid) {
+	public StrategyC(String[] givenCoins, String brokerName) {
 		super(givenCoins, brokerName);
 		this.valid = valid;
 		
 		// TODO Auto-generated constructor stub	
 	}
 	
-	private tradeSummary performStrategyC(double adaPrice, double xrpPrice) {
+	private tradeSummary performStrategyC(double adaPrice, double xrpPrice, boolean isValid) {
+		
 		String coin;
 		String action;
-		int quantity;
-		double price;
-		if(adaPrice < xrpPrice) {
-			coin = "ADA";
-			action = "Buy";
-			quantity = 50;
-			price = adaPrice;
+		String quantity;
+		String price;
+
+		if (isValid) {
+			
+			if(adaPrice < xrpPrice) {
+				coin = "ADA";
+				action = "Buy";
+				quantity = "50";
+				price = String.valueOf(adaPrice);
+			}
+			else {
+				coin = "XRP";
+				action = "Buy";
+				quantity = "50";
+				price = String.valueOf(xrpPrice);
+			}
+			tradeSummary summary = new tradeSummary(brokerName, strategy, coin, action, quantity, price);
+			return summary;
+		} else {
+			tradeSummary summary = new tradeSummary(brokerName, strategy, "null", "fail", "null", "null");
+			return summary;
 		}
-		else {
-			coin = "XRP";
-			action = "Buy";
-			quantity = 50;
-			price = xrpPrice;
-		}
-		tradeSummary summary = new tradeSummary(brokerName, strategy, coin, action, quantity, price);
-		return summary;
 	}
 }
