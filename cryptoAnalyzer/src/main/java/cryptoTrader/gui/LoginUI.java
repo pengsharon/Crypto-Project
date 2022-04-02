@@ -25,11 +25,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
-// nick
-
 public class LoginUI extends JFrame implements ActionListener {
 	/**
-	 * 
+	 * Class create a Login window to validate user based on name and password
 	 */
 	private static final long serialVersionUID = 1L;
 	
@@ -50,7 +48,11 @@ public class LoginUI extends JFrame implements ActionListener {
 
 	// Should be a reference to a separate object in actual implementation
 
-	// singleton design
+	// singleton design, ensures only 1 object of loginUI exists
+	/**
+	 * 
+	 * @return instance of loginUI
+	 */
 	public static LoginUI getInstance() {
 		if (instance == null)
 			instance = new LoginUI();
@@ -58,7 +60,9 @@ public class LoginUI extends JFrame implements ActionListener {
 		return instance;
 	}
 	
-	
+	/**
+	 * Class constructor, sets up panels and UI input boxes
+	 */
 	public LoginUI() {
 
 		// Set window title
@@ -96,7 +100,10 @@ public class LoginUI extends JFrame implements ActionListener {
 		
 	}
 
-
+	/**
+	 * main function applies singleton design and ensures only 1 object of loginUI exists
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		JFrame frame = LoginUI.getInstance(); //  singleton design for mainUI: get an instance of mainUI to start program
 		frame.setSize(800, 300);
@@ -106,6 +113,9 @@ public class LoginUI extends JFrame implements ActionListener {
 	}
 
 	@Override
+	/**
+	 * Evaluate credentials through "submit button"
+	 */
 	public void actionPerformed(ActionEvent e) {
 		
 		String userName = userNameInput.getText();
@@ -130,6 +140,12 @@ public class LoginUI extends JFrame implements ActionListener {
 		
 	}
 	
+	/**
+	 * Validates user
+	 * @param userName takes in inputted user
+	 * @param passWord takes in inputted pass
+	 * @return boolean of whether or not user is valid
+	 */
 	private boolean verifyCredentials(String userName, String passWord) {
 		boolean validUser = false;
 		try {
