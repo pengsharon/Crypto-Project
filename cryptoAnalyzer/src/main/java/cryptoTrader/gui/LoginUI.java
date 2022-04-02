@@ -135,12 +135,12 @@ public class LoginUI extends JFrame implements ActionListener {
 			Scanner credentials = new Scanner(new File("credentials.txt"));
 			while (credentials.hasNextLine()) {
 				String user = credentials.nextLine();
-				System.out.println(user);
+//				System.out.println(user);
 				String[] userInfo = user.split(",");
 				
 				if (userName.equals(userInfo[0]) && passWord.equals(userInfo[1])) {
 					validUser = true;
-					System.out.println("valid");
+//					System.out.println("valid");
 					break;
 				} 
 			}
