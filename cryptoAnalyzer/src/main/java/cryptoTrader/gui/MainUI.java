@@ -200,21 +200,28 @@ public class MainUI extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		// [["broker2"], ["eth", "btc"], ["stratA"]]
+		
 		String command = e.getActionCommand();
 		if ("refresh".equals(command)) {
+			brokerInfo[] combinedInfo = new brokerInfo[dtm.getRowCount()];
 			for (int count = 0; count < dtm.getRowCount(); count++){
+					String [] rowInfo = new String[3];
 					Object traderObject = dtm.getValueAt(count, 0);
 					if (traderObject == null) {
 						JOptionPane.showMessageDialog(this, "please fill in Trader name on line " + (count + 1) );
 						return;
 					}
 					String traderName = traderObject.toString();
+//					rowInfo[0] = traderName;
 					Object coinObject = dtm.getValueAt(count, 1);
 					if (coinObject == null) {
 						JOptionPane.showMessageDialog(this, "please fill in cryptocoin list on line " + (count + 1) );
 						return;
 					}
 					String[] coinNames = coinObject.toString().split(",");
+//					rowInfo[1] = coinNames;
 					Object strategyObject = dtm.getValueAt(count, 2);
 					if (strategyObject == null) {
 						JOptionPane.showMessageDialog(this, "please fill in strategy name on line " + (count + 1) );
@@ -222,7 +229,15 @@ public class MainUI extends JFrame implements ActionListener {
 					}
 					String strategyName = strategyObject.toString();
 					System.out.println(traderName + " " + Arrays.toString(coinNames) + " " + strategyName);
+					
+					brokerInfo thisBroker = new brokerInfo(traderName, coinNames, strategyName);
+					combinedInfo[count] = thisBroker;
 	        }
+			
+			System.out.println(combinedInfo[0].getBName());
+			System.out.println(combinedInfo[0].getCoinList());
+			System.out.println(combinedInfo[0].getStratName());
+			
 			stats.removeAll();
 			DataVisualizationCreator creator = new DataVisualizationCreator();
 			creator.createCharts();
@@ -303,7 +318,8 @@ public class MainUI extends JFrame implements ActionListener {
 			while ((brokerLine = br.readLine()) != null) { // no empty lines
 				String broker = brokerLine;
 				if(broker.equals(brokerName)) {
-					brokerLine = ""; //replace with empty line					
+					brokerLine = ""; //replace with empty line	
+					break;
 			    } else {
 			    	brokerLine = broker;
 			    }
