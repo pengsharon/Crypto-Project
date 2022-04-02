@@ -40,6 +40,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import cryptoTrader.utils.DataVisualizationCreator;
+import java.util.ArrayList;
 
 public class MainUI extends JFrame implements ActionListener {
 	/**
@@ -207,6 +208,7 @@ public class MainUI extends JFrame implements ActionListener {
 		String command = e.getActionCommand();
 		if ("refresh".equals(command)) {
 			brokerInfo[] combinedInfo = new brokerInfo[dtm.getRowCount()];
+			ArrayList<String> coinsToFetch = new ArrayList<String>();
 			for (int count = 0; count < dtm.getRowCount(); count++){
 					String [] rowInfo = new String[3];
 					Object traderObject = dtm.getValueAt(count, 0);
@@ -222,7 +224,11 @@ public class MainUI extends JFrame implements ActionListener {
 						return;
 					}
 					String[] coinNames = coinObject.toString().split(",");
-//					rowInfo[1] = coinNames;
+					for(int i = 0; i < coinNames.length; i++) {
+						if(!coinsToFetch.contains(coinNames[i])) {
+							coinsToFetch.add(coinNames[i]);
+						}
+					}
 					Object strategyObject = dtm.getValueAt(count, 2);
 					if (strategyObject == null) {
 						JOptionPane.showMessageDialog(this, "please fill in strategy name on line " + (count + 1) );
@@ -238,7 +244,9 @@ public class MainUI extends JFrame implements ActionListener {
 			System.out.println(combinedInfo[0].getBName());
 			System.out.println(combinedInfo[0].getCoinList());
 			System.out.println(combinedInfo[0].getStratName());
-			
+			for(int i = 0; i < coinsToFetch.size(); i++) {
+				System.out.println(coinsToFetch.get(i));
+			}	
 			stats.removeAll();
 			DataVisualizationCreator creator = new DataVisualizationCreator();
 			creator.createCharts();
