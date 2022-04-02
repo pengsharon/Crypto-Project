@@ -15,9 +15,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -39,8 +42,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
+import cryptoTrader.utils.DataFetcher;
 import cryptoTrader.utils.DataVisualizationCreator;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;    
 
 public class MainUI extends JFrame implements ActionListener {
 	/**
@@ -65,6 +71,7 @@ public class MainUI extends JFrame implements ActionListener {
 	private String selectedStrategy = "";
 	private DefaultTableModel dtm;
 	private JTable table; //this is a table
+	public Hashtable<String, Double> coin_prices = new Hashtable<String, Double>();
 
 	public static MainUI getInstance() {
 		if (instance == null)
@@ -229,6 +236,17 @@ public class MainUI extends JFrame implements ActionListener {
 							coinsToFetch.add(coinNames[i]);
 						}
 					}
+					
+					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
+					LocalDateTime now = LocalDateTime.now();
+					DataFetcher fetch_price = new DataFetcher();
+					
+					for (String s : coinsToFetch) {
+						double price = fetch_price.getPriceForCoin(s, dtf.format(now));
+						coin_prices.put(s, price);
+					}
+					
+					// --------------------------------------------------------------------------------- //
 					Object strategyObject = dtm.getValueAt(count, 2);
 					if (strategyObject == null) {
 						JOptionPane.showMessageDialog(this, "please fill in strategy name on line " + (count + 1) );
