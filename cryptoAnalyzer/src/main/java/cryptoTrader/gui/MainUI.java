@@ -268,25 +268,38 @@ public class MainUI extends JFrame implements ActionListener {
 					case "Strategy-A" :
 						StrategyA myStratA = new StrategyA(coinsGiven, brokerName);
 						isValid = myStratA.validate(coinsGiven, myStratA.getReqCoins());
+						if (!isValid) {
+							JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
+						}
 						mySummary = myStratA.performStrategyA(coinDict.get("BTC"), coinDict.get("ETH"), isValid);
 						break;
 					case "Strategy-B" :
 						StrategyB myStratB = new StrategyB(coinsGiven, brokerName);
 						isValid = myStratB.validate(coinsGiven, myStratB.getReqCoins());
+						if (!isValid) {
+							JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
+						}
 						mySummary = myStratB.performStrategyB(coinDict.get("ETH"), coinDict.get("DOGE"), isValid);
 						break;
 					case "Strategy-C" :
 						StrategyC myStratC = new StrategyC(coinsGiven, brokerName);
 						isValid = myStratC.validate(coinsGiven, myStratC.getReqCoins());
+						if (!isValid) {
+							JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
+						}
 						mySummary = myStratB.performStrategyC(coinDict.get("ADA"), coinDict.get("XRP"), isValid);
 						break;
 					case "Strategy-D" :
 						StrategyD myStratD = new StrategyD(coinsGiven, brokerName);
 						isValid = myStratD.validate(coinsGiven, myStratD.getReqCoins());
+						if (!isValid) {
+							JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
+						}
 						mySummary = myStratD.performStrategyD(coinDict.get("ADA"), coinDict.get("XRP"), isValid);
 						break;
 					default:
 						 mySummary = new tradeSummary("null", "null", "null", "fail", "null", "null");
+						 JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
 				}
 				
 				allTrades.add(mySummary);
