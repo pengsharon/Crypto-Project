@@ -18,4 +18,32 @@ public class tradeSummary {
 		this.quantity = quantity;
 		this.price = price;
 	}
+	
+	public String getTraderName() {
+		return traderName;
+	}
+	
+	public String getStrategy() {
+		return strategy;
+	}
+	
+	public String getCoin() {
+		return coin;
+	}
+	
+	public String getAction() {
+		return action;
+	}
+	
+	public int getQuantity() {
+		return quantity;
+	}
+	
+	public double getPrice() {
+		return price;
+	}
+	
+	public LocalDate date() {
+		return date;
+	}
 }
