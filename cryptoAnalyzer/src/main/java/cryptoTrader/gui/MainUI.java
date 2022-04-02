@@ -62,7 +62,7 @@ public class MainUI extends JFrame implements ActionListener {
 	private List<String> selectedTickers = new ArrayList<>();
 	private String selectedStrategy = "";
 	private DefaultTableModel dtm;
-	private JTable table;
+	private JTable table; //this is a table
 
 	public static MainUI getInstance() {
 		if (instance == null)
