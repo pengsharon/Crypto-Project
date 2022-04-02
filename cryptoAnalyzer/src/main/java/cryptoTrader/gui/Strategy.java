@@ -13,23 +13,15 @@ public class Strategy {
 	
 	private boolean validate(String[] givenCoins, ArrayList<String> requiredCoins) {
 		boolean isValid = true; //Strategy-A, Strategy-B check
-		if(requiredCoins.get(0) != null) {
-			for(String i : requiredCoins) {
-				for (int j = 0; j < givenCoins.length; j++) {
-					if (i.equals(givenCoins[j])) {
-						break;
-					}
-					if (j == givenCoins.length - 1) {
-						isValid = false;
-						return isValid;
-					}
+		for(String i : requiredCoins) {
+			for (int j = 0; j < givenCoins.length; j++) {
+				if (i.equals(givenCoins[j])) {
+					break;
 				}
-			}
-			return isValid;
-		}
-		else {
-			if(givenCoins.length != 3) {
-				isValid = false;
+				if (j == givenCoins.length - 1) {
+					isValid = false;
+					return isValid;
+				}
 			}
 		}
 		return isValid;
