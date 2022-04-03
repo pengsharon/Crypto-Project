@@ -4,8 +4,8 @@ public class StrategyB extends Strategy {
 	
 	public StrategyB() {
 		strategy = "Strategy-B";
-		requiredCoins.set(0,  "DOGE");
-		requiredCoins.set(0,  "DOGE");
+		requiredCoins.set(0,  "ETH");
+		requiredCoins.set(1,  "DOGE");
 		
 		
 	}
