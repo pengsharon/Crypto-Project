@@ -14,7 +14,7 @@ public abstract class Strategy {
 	public abstract tradeSummary performStrategy(double priceOne, double priceTwo, boolean isValid);
 	
 	// universal methods
-	public void validate(String[] givenCoins, ArrayList<String> requiredCoins) {
+	public boolean validate(String[] givenCoins, ArrayList<String> requiredCoins) {
 		isValid = true; 
 		for(String i : requiredCoins) {
 			for (int j = 0; j < givenCoins.length; j++) {
@@ -23,15 +23,20 @@ public abstract class Strategy {
 				}
 				if (j == givenCoins.length - 1) {
 					isValid = false;
-					JOptionPane.showMessageDialog(null, "Could not perform trade for broker: " + brokerName);					
+					JOptionPane.showMessageDialog(null, "Could not perform trade for broker: " + brokerName);
+					return isValid;
 				}
 			}
 		}
-		
+		return isValid;
 	}
 	
 	public ArrayList<String> getReqCoins() {
 		return requiredCoins;
+	}
+	
+	public String getBrokerName() {
+		return brokerName;
 	}
 }
 

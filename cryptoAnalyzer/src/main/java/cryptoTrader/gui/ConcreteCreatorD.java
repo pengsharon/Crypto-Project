@@ -2,8 +2,8 @@ package cryptoTrader.gui;
 
 public class ConcreteCreatorD extends Creator{
 	
-	public Strategy factoryMethod() {
-		return new StrategyD();
+	public Strategy factoryMethod(String brokerName) {
+		return new StrategyD(brokerName);
 	}
 
 }

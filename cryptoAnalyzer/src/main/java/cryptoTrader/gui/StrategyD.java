@@ -1,11 +1,11 @@
 package cryptoTrader.gui;
 public class StrategyD extends Strategy{
 
-	public StrategyD() {
+	public StrategyD(String brokerName) {
 		strategy = "Strategy-D";
 		requiredCoins.set(0, "DOGE");
 		requiredCoins.set(0, "TRX");
-		
+		this.brokerName = brokerName;
 	}
 	
 	@Override

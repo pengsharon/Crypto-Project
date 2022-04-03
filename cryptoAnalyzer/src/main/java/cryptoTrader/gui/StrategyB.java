@@ -2,11 +2,11 @@ package cryptoTrader.gui;
 public class StrategyB extends Strategy {
 	
 	
-	public StrategyB() {
+	public StrategyB(String brokerName) {
 		strategy = "Strategy-B";
 		requiredCoins.set(0,  "ETH");
 		requiredCoins.set(1,  "DOGE");
-		
+		this.brokerName = brokerName;
 		
 	}
 	

@@ -2,10 +2,11 @@ package cryptoTrader.gui;
 public class StrategyC extends Strategy {
 
 	
-	public StrategyC() {
+	public StrategyC(String brokerName) {
 		strategy = "Strategy-C";
 		requiredCoins.set(0, "ADA");
 		requiredCoins.set(1, "XRP");
+		this.brokerName = brokerName;
 	}
 	
 	public tradeSummary performStrategy(double adaPrice, double xrpPrice, boolean isValid) {
