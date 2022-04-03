@@ -304,7 +304,7 @@ public class MainUI extends JFrame implements ActionListener {
 				for (Creator strategy: strategies) {
 					Strategy brokerStrat = strategy.factoryMethod();
 					brokerStrat.validate(coinsGiven, brokerStrat.getReqCoins());
-					mySummary = brokerStrat.performStrategyA(coinDict.get("BTC"), coinDict.get("ETH"), isValid);
+					mySummary = brokerStrat.performStrategy(coinDict.get(brokerStrat.getReqCoins().get(0)), coinDict.get(brokerStrat.getReqCoins().get(1)), isValid);
 					allTrades.add(mySummary);
 				}
 				
