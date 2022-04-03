@@ -43,7 +43,7 @@ public class tradeSummary {
 		return price;
 	}
 	
-	public LocalDate date() {
-		return date;
+	public String getDate() {
+		return date.toString();
 	}
 }

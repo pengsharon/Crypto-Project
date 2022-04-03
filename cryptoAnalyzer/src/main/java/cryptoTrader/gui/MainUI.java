@@ -448,4 +448,26 @@ public class MainUI extends JFrame implements ActionListener {
             e.printStackTrace();
         }
     }
+	
+	private static void writeSummaries(ArrayList<tradeSummary> summary) {
+		File mFile = new File("summaries.txt");
+		try {
+			FileWriter summaries = new FileWriter("summaries.txt",true);
+			for(int i = 0; i < summary.size(); i++) {
+				String brokerName = summary.get(i).getTraderName();
+				String strategy = summary.get(i).getStrategy();
+				String coin = summary.get(i).getCoin();
+				String action = summary.get(i).getAction();
+				String quantity = summary.get(i).getQuantity();
+				String price = summary.get(i).getPrice();
+				String date = summary.get(i).getDate();
+				summaries.write(brokerName + "," + strategy + "," + coin + "," + action + "," + quantity + "," + price + "," + date + "\n");
+			}
+			summaries.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
