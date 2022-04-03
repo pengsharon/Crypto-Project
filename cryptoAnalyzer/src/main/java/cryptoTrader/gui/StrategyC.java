@@ -1,23 +1,14 @@
 package cryptoTrader.gui;
-import java.util.ArrayList;
 public class StrategyC extends Strategy {
-	private String strategy = "Strategy-C";
-	private boolean valid;
-	private ArrayList<String> requiredCoins = new ArrayList<String>() {
-		{
-			add("ADA");
-			add("XRP");
-		}
-	};
+
 	
-	public StrategyC(String[] givenCoins, String brokerName) {
-		super(givenCoins, brokerName);
-		this.valid = valid;
-		
-		// TODO Auto-generated constructor stub	
+	public StrategyC() {
+		strategy = "Strategy-C";
+		requiredCoins.set(0, "ADA");
+		requiredCoins.set(1, "XRP");
 	}
 	
-	private tradeSummary performStrategyC(double adaPrice, double xrpPrice, boolean isValid) {
+	public tradeSummary performStrategy(double adaPrice, double xrpPrice, boolean isValid) {
 		
 		String coin;
 		String action;

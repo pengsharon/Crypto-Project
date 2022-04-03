@@ -269,11 +269,10 @@ public class MainUI extends JFrame implements ActionListener {
 			
 			// iterating thru combinedInfo items, perform trades by broker
 			
-			// create an array storing trade Summaries
-			
+			// create an arrayList storing trade Summaries
 			ArrayList<tradeSummary> allTrades = new ArrayList<tradeSummary>();
 		
-			for (int i = 0; i < combinedInfo.length; i++) {
+			for (int i = 0; i < combinedInfo.length; i++) { // for each item of combined info, create a strategy object and perform the trade, append a summary to array
 				String[] coinsGiven = combinedInfo[i].getCoinList();
 				String strategyUsed = combinedInfo[i].getStratName();
 				String brokerName = combinedInfo[i].getBName();
@@ -282,47 +281,79 @@ public class MainUI extends JFrame implements ActionListener {
 				boolean isValid;
 				
 				
-				switch (strategyUsed) {
-					case "Strategy-A" :
-						StrategyA myStratA = new StrategyA(coinsGiven, brokerName);
-						isValid = myStratA.validate(coinsGiven, myStratA.getReqCoins());
-						if (!isValid) {
-							JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
-						}
-						mySummary = myStratA.performStrategyA(coinDict.get("BTC"), coinDict.get("ETH"), isValid);
+				// trying factory method 
+				Creator[] strategies =  new Creator[dtm.getRowCount()]; // create array of size rowNum
+				
+				for (int j = 0; j < dtm.getRowCount(); j++) {
+					switch (strategyUsed) {
+					case "Strategy-A":
+						strategies[i] = new ConcreteCreatorA();
 						break;
-					case "Strategy-B" :
-						StrategyB myStratB = new StrategyB(coinsGiven, brokerName);
-						isValid = myStratB.validate(coinsGiven, myStratB.getReqCoins());
-						if (!isValid) {
-							JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
-						}
-						mySummary = myStratB.performStrategyB(coinDict.get("ETH"), coinDict.get("DOGE"), isValid);
+					case "Strategy-B":
+						strategies[i] = new ConcreteCreatorB();
 						break;
-					case "Strategy-C" :
-						StrategyC myStratC = new StrategyC(coinsGiven, brokerName);
-						isValid = myStratC.validate(coinsGiven, myStratC.getReqCoins());
-						if (!isValid) {
-							JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
-						}
-						mySummary = myStratB.performStrategyC(coinDict.get("ADA"), coinDict.get("XRP"), isValid);
+					case "Strategy-C":
+						strategies[i] = new ConcreteCreatorC();
 						break;
-					case "Strategy-D" :
-						StrategyD myStratD = new StrategyD(coinsGiven, brokerName);
-						isValid = myStratD.validate(coinsGiven, myStratD.getReqCoins());
-						if (!isValid) {
-							JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
-						}
-						mySummary = myStratD.performStrategyD(coinDict.get("ADA"), coinDict.get("XRP"), isValid);
+					case "Strategy-D":
+						strategies[i] = new ConcreteCreatorD();
 						break;
-					default:
-						 mySummary = new tradeSummary("null", "null", "null", "fail", "null", "null");
-						 JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
+					}
 				}
 				
-				allTrades.add(mySummary);
+				for (Creator strategy: strategies) {
+					Strategy brokerStrat = strategy.factoryMethod();
+					brokerStrat.validate(coinsGiven, brokerStrat.getReqCoins());
+					mySummary = brokerStrat.performStrategyA(coinDict.get("BTC"), coinDict.get("ETH"), isValid);
+					allTrades.add(mySummary);
+				}
 				
 			}
+				
+				
+				
+//				switch (strategyUsed) {
+//					case "Strategy-A" :
+//						StrategyA myStratA = new StrategyA(coinsGiven, brokerName);
+//						isValid = myStratA.validate(coinsGiven, myStratA.getReqCoins());
+//						if (!isValid) {
+////							JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
+//							JOptionPane.showMessageDialog(null, "Could not perform trade for broker: " + brokerName);
+//						}
+//						mySummary = myStratA.performStrategyA(coinDict.get("BTC"), coinDict.get("ETH"), isValid);
+//						break;
+//					case "Strategy-B" :
+//						StrategyB myStratB = new StrategyB(coinsGiven, brokerName);
+//						isValid = myStratB.validate(coinsGiven, myStratB.getReqCoins());
+//						if (!isValid) {
+//							JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
+//						}
+//						mySummary = myStratB.performStrategyB(coinDict.get("ETH"), coinDict.get("DOGE"), isValid);
+//						break;
+//					case "Strategy-C" :
+//						StrategyC myStratC = new StrategyC(coinsGiven, brokerName);
+//						isValid = myStratC.validate(coinsGiven, myStratC.getReqCoins());
+//						if (!isValid) {
+//							JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
+//						}
+//						mySummary = myStratB.performStrategyC(coinDict.get("ADA"), coinDict.get("XRP"), isValid);
+//						break;
+//					case "Strategy-D" :
+//						StrategyD myStratD = new StrategyD(coinsGiven, brokerName);
+//						isValid = myStratD.validate(coinsGiven, myStratD.getReqCoins());
+//						if (!isValid) {
+//							JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
+//						}
+//						mySummary = myStratD.performStrategyD(coinDict.get("ADA"), coinDict.get("XRP"), isValid);
+//						break;
+//					default:
+//						 mySummary = new tradeSummary("null", "null", "null", "fail", "null", "null");
+//						 JOptionPane.showMessageDialog(null, "Could not perform trade in row: " + i+1);
+//				}
+//				
+//				allTrades.add(mySummary);
+//				
+//			}
 			
 			
 			stats.removeAll();
