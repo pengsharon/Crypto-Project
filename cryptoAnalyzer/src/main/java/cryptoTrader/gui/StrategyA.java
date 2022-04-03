@@ -2,10 +2,11 @@ package cryptoTrader.gui;
 public class StrategyA extends Strategy {
 	
 	
-	public StrategyA() {
+	public StrategyA(String brokerName) {
 		requiredCoins.set(0, "BTC"); 
 		requiredCoins.set(1,  "ETH");
 		strategy = "Strategy-A";
+		this.brokerName = brokerName;
 	}
 	
 	public tradeSummary performStrategy(double btcPrice, double ethPrice, boolean isValid) {

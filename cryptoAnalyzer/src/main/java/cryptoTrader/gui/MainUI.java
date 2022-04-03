@@ -209,9 +209,7 @@ public class MainUI extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		// [["broker2"], ["eth", "btc"], ["stratA"]]
-		
+				
 		String command = e.getActionCommand();
 		if ("refresh".equals(command)) {
 			brokerInfo[] combinedInfo = new brokerInfo[dtm.getRowCount()];
@@ -271,46 +269,42 @@ public class MainUI extends JFrame implements ActionListener {
 			
 			// create an arrayList storing trade Summaries
 			ArrayList<tradeSummary> allTrades = new ArrayList<tradeSummary>();
+			
+			// FACTORY METHOD TO CREATE STRATEGY OBJECTS
+			Creator[] strategies =  new Creator[dtm.getRowCount()]; // create array of size rowNum
+		
 		
 			for (int i = 0; i < combinedInfo.length; i++) { // for each item of combined info, create a strategy object and perform the trade, append a summary to array
 				String[] coinsGiven = combinedInfo[i].getCoinList();
 				String strategyUsed = combinedInfo[i].getStratName();
 				String brokerName = combinedInfo[i].getBName();
 				
-				tradeSummary mySummary;
-				boolean isValid;
+				tradeSummary mySummary; // tradeSummary object of each trade performed;
+				boolean isValid; // checks if each strategy has the correct inputted coins 
 				
-				
-				// trying factory method 
-				Creator[] strategies =  new Creator[dtm.getRowCount()]; // create array of size rowNum
-				
-				for (int j = 0; j < dtm.getRowCount(); j++) {
-					switch (strategyUsed) {
-					case "Strategy-A":
-						strategies[i] = new ConcreteCreatorA();
-						break;
-					case "Strategy-B":
-						strategies[i] = new ConcreteCreatorB();
-						break;
-					case "Strategy-C":
-						strategies[i] = new ConcreteCreatorC();
-						break;
-					case "Strategy-D":
-						strategies[i] = new ConcreteCreatorD();
-						break;
-					}
+				switch (strategyUsed) {
+				case "Strategy-A":
+					strategies[i] = new ConcreteCreatorA();
+					break;
+				case "Strategy-B":
+					strategies[i] = new ConcreteCreatorB();
+					break;
+				case "Strategy-C":
+					strategies[i] = new ConcreteCreatorC();
+					break;
+				case "Strategy-D":
+					strategies[i] = new ConcreteCreatorD();
+					break;
+					
 				}
 				
-				for (Creator strategy: strategies) {
-					Strategy brokerStrat = strategy.factoryMethod();
-					brokerStrat.validate(coinsGiven, brokerStrat.getReqCoins());
-					mySummary = brokerStrat.performStrategy(coinDict.get(brokerStrat.getReqCoins().get(0)), coinDict.get(brokerStrat.getReqCoins().get(1)), isValid);
-					allTrades.add(mySummary);
-				}
+				Strategy brokerStrat = strategies[i].factoryMethod(brokerName);
+				isValid = brokerStrat.validate(coinsGiven, brokerStrat.getReqCoins());
+				mySummary = brokerStrat.performStrategy(coinDict.get(brokerStrat.getReqCoins().get(0)), coinDict.get(brokerStrat.getReqCoins().get(1)), isValid);
+				allTrades.add(mySummary);
 				
 			}
-				
-				
+			
 				
 //				switch (strategyUsed) {
 //					case "Strategy-A" :
@@ -454,36 +448,4 @@ public class MainUI extends JFrame implements ActionListener {
             e.printStackTrace();
         }
     }
-	
-//	private static void removeBroker(String brokerName) {
-//		
-//		try {
-//			BufferedWriter bw = new BufferedWriter(new FileWriter("brokerNames.txt"));
-//			
-//		    String brokerLine;
-//		    InputStream readingFile = new FileInputStream("brokerNames.txt");
-//			BufferedReader br = new BufferedReader(new InputStreamReader(readingFile));
-//			
-//			// ISSUE: FOR SOME REASON, ALL ITEAMS OF BROKER NAMES GETS DELETED
-//			while ((brokerLine = br.readLine()) != null) { // no empty lines
-//				String broker = brokerLine;
-//				if(broker.equals(brokerName)) {
-//					brokerLine = ""; //replace with empty line	
-//					break;
-//			    } else {
-//			    	brokerLine = broker;
-//			    }
-//				
-//			    bw.close();
-//			    br.close();
-//			    
-//				}
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//		
-//	}
-	
 }
