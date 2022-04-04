@@ -1,3 +1,9 @@
 alsdfj,Strategy-A,BTC,Sell,1,0.0,2022-04-03
 asdf,Strategy-A,BTC,Sell,1,0.0,2022-04-03
 asdf,Strategy-A,BTC,Sell,1,0.0,2022-04-03
+as,Strategy-A,BTC,Sell,1,0.0,2022-04-03
+sd,Strategy-A,BTC,Sell,1,0.0,2022-04-03
+asfd,Strategy-A,BTC,Sell,1,0.0,2022-04-03
+asdf,Strategy-A,BTC,Sell,1,0.0,2022-04-03
+asd,Strategy-A,BTC,Sell,1,0.0,2022-04-03
+asdf,Strategy-A,ETH,Buy,500,3595.378777847744,2022-04-03
