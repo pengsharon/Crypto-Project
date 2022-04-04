@@ -58,8 +58,8 @@ public class DataFetcher {
 		else if (id.equals("DOGE")) {
 			return "dogecoin";
 		}
-		else if (id.equals("HBAR")) {
-			return "hedera";
+		else if (id.equals("TRX")) {
+			return "tron";
 		}
 		return null;
 	}
