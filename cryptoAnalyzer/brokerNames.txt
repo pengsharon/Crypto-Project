@@ -1,6 +1,0 @@
-<<<<<<< Updated upstream
-sharon
-deanna
-=======
-a
->>>>>>> Stashed changes
