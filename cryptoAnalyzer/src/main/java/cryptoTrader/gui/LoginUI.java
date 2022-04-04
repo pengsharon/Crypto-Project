@@ -78,8 +78,7 @@ public class LoginUI extends JFrame implements ActionListener {
 	 */
 	public LoginUI() {
 
-		// Set window title
-		super("Login Window");
+		super("Crypto Trading Tool");
 
 		loginPanel = new JPanel();
 		loginPanel.setLayout(new GridLayout(3, 2));
