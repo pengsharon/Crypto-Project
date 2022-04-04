@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 public abstract class Strategy {
 	
 	protected String[] givenCoins;
-	protected ArrayList<String> requiredCoins;
+	protected ArrayList<String> requiredCoins = new ArrayList<String>();
 	protected String brokerName;
 	protected String strategy;
 	protected boolean isValid;
