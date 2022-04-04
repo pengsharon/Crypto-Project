@@ -3,8 +3,8 @@ public class StrategyA extends Strategy {
 	
 	
 	public StrategyA(String brokerName) {
-		requiredCoins.set(0, "BTC"); 
-		requiredCoins.set(1,  "ETH");
+		requiredCoins.add("BTC");
+		requiredCoins.add("ETH");
 		strategy = "Strategy-A";
 		this.brokerName = brokerName;
 	}
