@@ -30,11 +30,13 @@ public class StrategyA extends Strategy {
 				price = String.valueOf(btcPrice);
 			}
 			tradeSummary summary = new tradeSummary(brokerName, strategy, coin, action, quantity, price);
+			System.out.println("\nTesting: " + brokerName + ", " + strategy + ", " + coin + ", " + action + ", " + price + "\n\n");
 			return summary;
 		} else {
 			tradeSummary summary = new tradeSummary(brokerName, strategy, "null", "fail", "null", "null");
 			return summary;
 		}		
+		
 	}
 }
 

@@ -15,6 +15,7 @@ public abstract class Strategy {
 	
 	// universal methods
 	public boolean validate(String[] givenCoins, ArrayList<String> requiredCoins) {
+		// System.out.println(givenCoins[0] + "     " + givenCoins[1]);
 		isValid = true; 
 		for(String i : requiredCoins) {
 			for (int j = 0; j < givenCoins.length; j++) {
@@ -22,6 +23,7 @@ public abstract class Strategy {
 					break;
 				}
 				if (j == givenCoins.length - 1) {
+					
 					isValid = false;
 					JOptionPane.showMessageDialog(null, "Could not perform trade for broker: " + brokerName);
 					return isValid;

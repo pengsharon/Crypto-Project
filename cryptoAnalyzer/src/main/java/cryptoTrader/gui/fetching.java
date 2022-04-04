@@ -28,6 +28,7 @@ public class fetching {
 		coinsToFetch.add("BTC");
 		coinsToFetch.add("ETH");
 		
+		
 		for (String s : coinsToFetch) {
 			System.out.println(s);
 		}

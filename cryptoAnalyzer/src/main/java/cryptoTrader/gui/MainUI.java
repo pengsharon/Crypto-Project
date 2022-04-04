@@ -240,6 +240,7 @@ public class MainUI extends JFrame implements ActionListener {
 					
 					for (String s : coinsToFetch) {
 						double price = fetch_price.getPriceForCoin(s, dtf.format(now));
+						System.out.println("Key and price being put: " + s + "    " + price + "\n\n");
 						coinDict.put(s, price);
 					}
 					
@@ -305,6 +306,7 @@ public class MainUI extends JFrame implements ActionListener {
 				
 			}
 			
+			writeSummaries(allTrades);
 				
 //				switch (strategyUsed) {
 //					case "Strategy-A" :
