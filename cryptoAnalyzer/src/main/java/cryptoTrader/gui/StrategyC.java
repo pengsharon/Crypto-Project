@@ -22,13 +22,13 @@ public class StrategyC extends Strategy {
 				coin = "ADA";
 				action = "Buy";
 				quantity = "50";
-				price = String.valueOf(adaPrice);
+				price = String.format("%.2f", adaPrice);
 			}
 			else {
 				coin = "XRP";
 				action = "Buy";
 				quantity = "50";
-				price = String.valueOf(xrpPrice);
+				price = String.format("%.2f", xrpPrice);
 			}
 			tradeSummary summary = new tradeSummary(brokerName, strategy, coin, action, quantity, price);
 			return summary;

@@ -255,7 +255,7 @@ public class MainUI extends JFrame implements ActionListener {
 					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy");  
 					LocalDateTime now = LocalDateTime.now();
 					
-					System.out.println(dtf.format(now));
+//					System.out.println(dtf.format(now));
 					DataFetcher fetch_price = new DataFetcher();
 					
 					for (String s : coinsToFetch) {
@@ -282,12 +282,12 @@ public class MainUI extends JFrame implements ActionListener {
 					combinedInfo[count] = thisBroker;
 	        }
 			
-			System.out.println(combinedInfo[0].getBName());
-			System.out.println(combinedInfo[0].getCoinList());
-			System.out.println(combinedInfo[0].getStratName());
-			for(int i = 0; i < coinsToFetch.size(); i++) {
-				System.out.println(coinsToFetch.get(i));
-			}
+//			System.out.println(combinedInfo[0].getBName());
+//			System.out.println(combinedInfo[0].getCoinList());
+//			System.out.println(combinedInfo[0].getStratName());
+//			for(int i = 0; i < coinsToFetch.size(); i++) {
+//				System.out.println(coinsToFetch.get(i));
+//			}
 			
 			// assuming we have a dict (hashmap) of coins and prices fetched. (coinDict)
 			

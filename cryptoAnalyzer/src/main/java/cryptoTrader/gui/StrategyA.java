@@ -21,13 +21,13 @@ public class StrategyA extends Strategy {
 				coin = "ETH";
 				action = "Buy";
 				quantity = "500";
-				price = String.valueOf(ethPrice);
+				price = String.format("%.2f", ethPrice);
 			}
 			else {
 				coin = "BTC";
 				action = "Sell";
 				quantity = "1";
-				price = String.valueOf(btcPrice);
+				price = String.format("%.2f", btcPrice);
 			}
 			tradeSummary summary = new tradeSummary(brokerName, strategy, coin, action, quantity, price);
 			System.out.println("\nTesting: " + brokerName + ", " + strategy + ", " + coin + ", " + action + ", " + price + "\n\n");
