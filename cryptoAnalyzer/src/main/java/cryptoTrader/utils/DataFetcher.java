@@ -63,10 +63,11 @@ public class DataFetcher {
 		}
 		return null;
 	}
+	
 	public double getPriceForCoin(String id, String date) {
 		double price = 0.0;
 		
-		JsonObject jsonObject = getDataForCrypto(id, date);
+		JsonObject jsonObject = getDataForCrypto(converter(id), date);
 		if (jsonObject != null) {
 			JsonObject marketData = jsonObject.get("market_data").getAsJsonObject();
 			JsonObject currentPrice = marketData.get("current_price").getAsJsonObject();
@@ -79,7 +80,7 @@ public class DataFetcher {
 	public double getMarketCapForCoin(String id, String date) {
 		double marketCap = 0.0;
 		
-		JsonObject jsonObject = getDataForCrypto(id, date);
+		JsonObject jsonObject = getDataForCrypto(converter(id), date);
 		if (jsonObject != null) {
 			JsonObject marketData = jsonObject.get("market_data").getAsJsonObject();
 			JsonObject currentPrice = marketData.get("market_cap").getAsJsonObject();
@@ -92,7 +93,7 @@ public class DataFetcher {
 	public double getVolumeForCoin(String id, String date) {
 		double volume = 0.0;
 		
-		JsonObject jsonObject = getDataForCrypto(id, date);
+		JsonObject jsonObject = getDataForCrypto(converter(id), date);
 		if (jsonObject != null) {
 			JsonObject marketData = jsonObject.get("market_data").getAsJsonObject();
 			JsonObject currentPrice = marketData.get("total_volume").getAsJsonObject();
