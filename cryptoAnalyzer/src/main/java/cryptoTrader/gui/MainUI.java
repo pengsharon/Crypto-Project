@@ -19,6 +19,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -233,15 +234,35 @@ public class MainUI extends JFrame implements ActionListener {
 							coinsToFetch.add(coinNames[i]);
 						}
 					}
+					System.out.println("What is in coinstofetch?: " + coinsToFetch);
 					
-					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
+//					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");  
+//					LocalDateTime now = LocalDateTime.now();
+//					DataFetcher fetch_price = new DataFetcher();
+//					
+//					for (String s : coinsToFetch) {
+//						System.out.println("Coin is " + s + ", date is: " + dtf.format(now));
+//						double price = fetch_price.getPriceForCoin(s, dtf.format(now));
+//						System.out.println("What are we putting into the dict?: " + s + "     " + price);
+//						coinDict.put(s, price);
+//					}
+					
+					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy");  
 					LocalDateTime now = LocalDateTime.now();
+					
+					System.out.println(dtf.format(now));
 					DataFetcher fetch_price = new DataFetcher();
 					
 					for (String s : coinsToFetch) {
 						double price = fetch_price.getPriceForCoin(s, dtf.format(now));
-						System.out.println("Key and price being put: " + s + "    " + price + "\n\n");
 						coinDict.put(s, price);
+					}
+					
+					Enumeration<String> p = coinDict.keys();
+					
+					while (p.hasMoreElements()) {
+						String key = p.nextElement();
+						System.out.println("Key: " + key + "\t\t Price: " + coinDict.get(key));
 					}
 					
 					// --------------------------------------------------------------------------------- //
