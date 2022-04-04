@@ -93,8 +93,14 @@ public class MainUI extends JFrame implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
+		
+		// set new text file: clear contents
+		try {
+			new FileWriter("summaries.txt", false).close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// Set top bar
 
 
@@ -268,9 +274,15 @@ public class MainUI extends JFrame implements ActionListener {
 					// --------------------------------------------------------------------------------- //
 					Object strategyObject = dtm.getValueAt(count, 2);
 					if (strategyObject == null) {
-						JOptionPane.showMessageDialog(this, "please fill in strategy name on line " + (count + 1) );
+						JOptionPane.showMessageDialog(this, "Please fill in strategy name on line " + (count + 1) );
+						return;
+					} 
+					
+					if (strategyObject == "None") {
+						JOptionPane.showMessageDialog(this, "Please select a strategy on line " + (count + 1) );
 						return;
 					}
+					
 					String strategyName = strategyObject.toString();
 					System.out.println(traderName + " " + Arrays.toString(coinNames) + " " + strategyName);
 					
@@ -317,14 +329,27 @@ public class MainUI extends JFrame implements ActionListener {
 				case "Strategy-D":
 					strategies[i] = new ConcreteCreatorD();
 					break;
-					
+				default:
+					break;
 				}
 				
-				Strategy brokerStrat = strategies[i].factoryMethod(brokerName);
-				isValid = brokerStrat.validate(coinsGiven, brokerStrat.getReqCoins());
-				mySummary = brokerStrat.performStrategy(coinDict.get(brokerStrat.getReqCoins().get(0)), coinDict.get(brokerStrat.getReqCoins().get(1)), isValid);
-				allTrades.add(mySummary);
+				if (strategies[i] != null) {
+					Strategy brokerStrat = strategies[i].factoryMethod(brokerName);
+					isValid = brokerStrat.validate(coinsGiven, brokerStrat.getReqCoins());
+					mySummary = brokerStrat.performStrategy(coinDict.get(brokerStrat.getReqCoins().get(0)), coinDict.get(brokerStrat.getReqCoins().get(1)), isValid);
+					allTrades.add(mySummary);
+				}
 				
+//				if (strategies[i] != null) {
+//					Strategy brokerStrat = strategies[i].factoryMethod(brokerName);
+//					isValid = brokerStrat.validate(coinsGiven, brokerStrat.getReqCoins());
+//					mySummary = brokerStrat.performStrategy(coinDict.get(brokerStrat.getReqCoins().get(0)), coinDict.get(brokerStrat.getReqCoins().get(1)), isValid);
+//					allTrades.add(mySummary);
+//				} 
+//					else {
+////					mySummary = new tradeSummary(brokerName, "null", "null", "fail", "null", "null");
+////					allTrades.add(mySummary);
+////				}
 			}
 			
 			writeSummaries(allTrades);
@@ -484,7 +509,12 @@ public class MainUI extends JFrame implements ActionListener {
 				String quantity = summary.get(i).getQuantity();
 				String price = summary.get(i).getPrice();
 				String date = summary.get(i).getDate();
-				summaries.write(brokerName + "," + strategy + "," + coin + "," + action + "," + quantity + "," + price + "," + date + "\n");
+				if (i < summary.size() - 1) {
+					summaries.write(brokerName + "," + strategy + "," + coin + "," + action + "," + quantity + "," + price + "," + date + "\n");
+				}
+				else {
+					summaries.write(brokerName + "," + strategy + "," + coin + "," + action + "," + quantity + "," + price + "," + date);
+				}
 			}
 			summaries.close();
 		} catch (IOException e) {

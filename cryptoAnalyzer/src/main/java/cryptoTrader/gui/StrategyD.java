@@ -3,8 +3,8 @@ public class StrategyD extends Strategy{
 
 	public StrategyD(String brokerName) {
 		strategy = "Strategy-D";
-		requiredCoins.set(0, "DOGE");
-		requiredCoins.set(0, "TRX");
+		requiredCoins.add("DOGE");
+		requiredCoins.add("TRX");
 		this.brokerName = brokerName;
 	}
 	
