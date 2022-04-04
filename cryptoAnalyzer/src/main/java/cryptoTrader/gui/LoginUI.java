@@ -1,3 +1,12 @@
+/**
+* The LoginUI adopts the sample code provided in class
+* to display the UI of the login page
+*
+* @author  Deanna Chen, Nicole Han, Nick Lam, Sharon Peng
+* @version 1.0
+* @since   2014-03-31 
+*/
+
 package cryptoTrader.gui;
 
 import java.awt.BorderLayout;
@@ -25,6 +34,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
+/**
+* The LoginUI class allows users to input info, verify credentials, 
+* and display the mainUI 
+*/
 public class LoginUI extends JFrame implements ActionListener {
 	/**
 	 * Class create a Login window to validate user based on name and password
