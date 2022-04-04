@@ -256,7 +256,7 @@ public class DataVisualizationCreator {
 				if (summaryTable[i][0] == null) {
 					break;
 				}
-				if (summaryTable[i][0].equals(broker)) {
+				if (summaryTable[i][0].equals(broker) && (!summaryTable[i][3].equals("fail"))) {
 					String stratName = (String) summaryTable[i][1];
 					switch (stratName) {
 					case "Strategy-A":
