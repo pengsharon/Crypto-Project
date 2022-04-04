@@ -1,1 +1,1 @@
-sharon,Strategy-A,BTC,Sell,1,58172.57,2022-04-04
+b4,Strategy-B,null,fail,null,null,2022-04-04
