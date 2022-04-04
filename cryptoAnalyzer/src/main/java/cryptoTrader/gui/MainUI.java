@@ -328,7 +328,11 @@ public class MainUI extends JFrame implements ActionListener {
 				if (strategies[i] != null) {
 					Strategy brokerStrat = strategies[i].factoryMethod(brokerName);
 					isValid = brokerStrat.validate(coinsGiven, brokerStrat.getReqCoins());
-					mySummary = brokerStrat.performStrategy(coinDict.get(brokerStrat.getReqCoins().get(0)), coinDict.get(brokerStrat.getReqCoins().get(1)), isValid);
+					if (isValid) {
+						mySummary = brokerStrat.performStrategy(coinDict.get(brokerStrat.getReqCoins().get(0)), coinDict.get(brokerStrat.getReqCoins().get(1)), isValid);
+					} else {
+						mySummary = new tradeSummary(brokerName, strategyUsed, "null", "fail", "null", "null");
+					}
 					allTrades.add(mySummary);
 				}
 				
