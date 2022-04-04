@@ -71,7 +71,7 @@ public class MainUI extends JFrame implements ActionListener {
 	private String selectedStrategy = "";
 	private DefaultTableModel dtm;
 	private JTable table; //this is a table
-	public Hashtable<String, Double> coin_prices = new Hashtable<String, Double>();
+	public Hashtable<String, Double> coinDict = new Hashtable<String, Double>();
 
 	public static MainUI getInstance() {
 		if (instance == null)
@@ -240,7 +240,7 @@ public class MainUI extends JFrame implements ActionListener {
 					
 					for (String s : coinsToFetch) {
 						double price = fetch_price.getPriceForCoin(s, dtf.format(now));
-						coin_prices.put(s, price);
+						coinDict.put(s, price);
 					}
 					
 					// --------------------------------------------------------------------------------- //

@@ -41,6 +41,28 @@ public class DataFetcher {
 		return null;
 	}
 	
+	
+	private String converter(String id) {
+		if (id.equals("BTC")) {
+			return "bitcoin";
+		}
+		else if (id.equals("ETH")) {
+			return "ethereum";
+		}
+		else if (id.equals("ADA")) {
+			return "cardano";
+		}
+		else if (id.equals("XRP")) {
+			return "ripple";
+		}
+		else if (id.equals("DOGE")) {
+			return "dogecoin";
+		}
+		else if (id.equals("HBAR")) {
+			return "hedera";
+		}
+		return null;
+	}
 	public double getPriceForCoin(String id, String date) {
 		double price = 0.0;
 		
