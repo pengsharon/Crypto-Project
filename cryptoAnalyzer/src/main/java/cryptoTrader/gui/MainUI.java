@@ -240,7 +240,6 @@ public class MainUI extends JFrame implements ActionListener {
 							coinsToFetch.add(coinNames[i]);
 						}
 					}
-					System.out.println("What is in coinstofetch?: " + coinsToFetch);
 					
 //					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");  
 //					LocalDateTime now = LocalDateTime.now();
@@ -262,13 +261,6 @@ public class MainUI extends JFrame implements ActionListener {
 					for (String s : coinsToFetch) {
 						double price = fetch_price.getPriceForCoin(s, dtf.format(now));
 						coinDict.put(s, price);
-					}
-					
-					Enumeration<String> p = coinDict.keys();
-					
-					while (p.hasMoreElements()) {
-						String key = p.nextElement();
-						System.out.println("Key: " + key + "\t\t Price: " + coinDict.get(key));
 					}
 					
 					// --------------------------------------------------------------------------------- //
