@@ -11,7 +11,12 @@ These credentials are stored in "credentials.txt" and can be modified by adding 
 
 Once taken to the mainUI page, you can perform trades and add rows as you please.
 
-Please use 
+Strategy description:
+A) If BTC coin price > 14*ETH coin price, buy 500 ETH coin, otherwise sell 1 BTC
+B) If ETH price > 1000*DOGE coin price, buy 100 DOGE, otherwise sell 200 DOGE
+C) ADA, XRP, buy cheapest (50x)
+D) DOGE, TRX, sell most expensive (200x) 
+
 
 Coins used are:
 ETH, BTC, ADA, DOGE, XRP, TRX
