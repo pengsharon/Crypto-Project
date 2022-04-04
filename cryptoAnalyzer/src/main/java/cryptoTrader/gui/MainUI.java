@@ -509,12 +509,7 @@ public class MainUI extends JFrame implements ActionListener {
 				String quantity = summary.get(i).getQuantity();
 				String price = summary.get(i).getPrice();
 				String date = summary.get(i).getDate();
-				if (i < summary.size() - 1) {
-					summaries.write(brokerName + "," + strategy + "," + coin + "," + action + "," + quantity + "," + price + "," + date + "\n");
-				}
-				else {
-					summaries.write(brokerName + "," + strategy + "," + coin + "," + action + "," + quantity + "," + price + "," + date);
-				}
+				summaries.write(brokerName + "," + strategy + "," + coin + "," + action + "," + quantity + "," + price + "," + date + "\n");
 			}
 			summaries.close();
 		} catch (IOException e) {
