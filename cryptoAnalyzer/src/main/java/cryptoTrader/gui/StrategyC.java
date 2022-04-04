@@ -4,8 +4,8 @@ public class StrategyC extends Strategy {
 	
 	public StrategyC(String brokerName) {
 		strategy = "Strategy-C";
-		requiredCoins.set(0, "ADA");
-		requiredCoins.set(1, "XRP");
+		requiredCoins.add("ADA");
+		requiredCoins.add("XRP");
 		this.brokerName = brokerName;
 	}
 	

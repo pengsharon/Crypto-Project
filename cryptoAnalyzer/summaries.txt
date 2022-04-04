@@ -1,3 +1,0 @@
-alsdfj,Strategy-A,BTC,Sell,1,0.0,2022-04-03
-asdf,Strategy-A,BTC,Sell,1,0.0,2022-04-03
-asdf,Strategy-A,BTC,Sell,1,0.0,2022-04-03
