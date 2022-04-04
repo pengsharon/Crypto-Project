@@ -71,11 +71,11 @@ public class DataVisualizationCreator {
 		// Dummy data for demo purposes. These should come from actual fetcher
 		Object[][] data = summaryToTable();
 		
-		for (int i = 0; i <  data.length; i++) {
-			for (int j = 0; j < 7; j++) {
-				System.out.println(data[i][j]);
-			}
-		}
+//		for (int i = 0; i <  data.length; i++) {
+//			for (int j = 0; j < 7; j++) {
+//				System.out.println(data[i][j]);
+//			}
+//		}
 		
 //		{
 //				{"Trader-1", "Strategy-A", "ETH", "Buy", "500", "150.3","13-January-2022"},
@@ -344,7 +344,7 @@ public class DataVisualizationCreator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("NUMLINES IN FILE: " + numLines);
+//		System.out.println("NUMLINES IN FILE: " + numLines);
 		String[][] summaryForTable = new String[numLines][7];
 		try {
 			Scanner summary = new Scanner(new File("summaries.txt"));
