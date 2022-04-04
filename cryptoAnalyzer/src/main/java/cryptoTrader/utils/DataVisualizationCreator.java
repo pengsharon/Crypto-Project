@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import javax.swing.BorderFactory;
@@ -67,6 +70,13 @@ public class DataVisualizationCreator {
 		
 		// Dummy data for demo purposes. These should come from actual fetcher
 		Object[][] data = summaryToTable();
+		
+		for (int i = 0; i <  data.length; i++) {
+			for (int j = 0; j < 7; j++) {
+				System.out.println(data[i][j]);
+			}
+		}
+		
 //		{
 //				{"Trader-1", "Strategy-A", "ETH", "Buy", "500", "150.3","13-January-2022"},
 //				{"Trader-2", "Strategy-B", "BTC", "Sell", "200", "50.2","13-January-2022"},
@@ -205,11 +215,98 @@ public class DataVisualizationCreator {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 //		Those are hard-coded values!!!! 
 //		You will have to come up with a proper datastructure to populate the BarChart with live data!
-		dataset.setValue(6, "Trader-1", "Strategy-A");
-		dataset.setValue(5, "Trader-2", "Strategy-B");
+//		dataset.setValue(6, "Trader-1", "Strategy-A");
+//		dataset.setValue(5, "Trader-2", "Strategy-B");
 //		dataset.setValue(0, "Trader-3", "Strategy-E");
-		dataset.setValue(1, "Trader-3", "Strategy-C");
-		dataset.setValue(10, "Trader-4", "Strategy-D");
+//		dataset.setValue(1, "Trader-3", "Strategy-C");
+//		dataset.setValue(10, "Trader-4", "Strategy-D");
+		
+		HashMap<String, Integer> hashA = new HashMap<String, Integer>();
+		HashMap<String, Integer> hashB = new HashMap<String, Integer>();
+		HashMap<String, Integer> hashC = new HashMap<String, Integer>();
+		HashMap<String, Integer> hashD = new HashMap<String, Integer>();
+		
+		
+		ArrayList<String> brokerList = new ArrayList<String>(); // create arrayList containing all unique brokers
+		Object[][] summaryTable = summaryToTable(); // call table information
+		for(int i = 0; i < summaryTable.length; i++) { // iterate through table to grab uniques
+			if(!brokerList.contains(summaryTable[i][0])) {
+				brokerList.add((String) summaryTable[i][0]);
+			}
+		}
+		
+		// for item in brokerList,
+			// for item in summaryTable
+				// if summarytable[i][0].equals(item)
+					// hashA.put(summaryTable[i][1], hashA.get(summaryTable[i][1]) + 1)
+		
+		// initialize all brokers for all strats to 0
+		for(String broker : brokerList) {
+		
+			hashA.put(broker, 0);
+			hashB.put(broker, 0);
+			hashC.put(broker, 0);
+			hashD.put(broker, 0);
+			
+		}
+		
+		// loop through summaryTable to updates hashtables
+		for(String broker : brokerList) {
+			for (int i = 0; i < summaryTable.length; i++) {
+				if (summaryTable[i][0] == null) {
+					break;
+				}
+				if (summaryTable[i][0].equals(broker)) {
+					String stratName = (String) summaryTable[i][1];
+					switch (stratName) {
+					case "Strategy-A":
+						hashA.put(broker, hashA.get(broker) + 1);
+						break;
+					case "Strategy-B":
+						hashB.put(broker, hashB.get(broker) + 1);
+						break;
+					case "Strategy-C":
+						hashC.put(broker, hashC.get(broker) + 1);
+						break;
+					case "Strategy-D":
+						hashD.put(broker, hashD.get(broker) + 1);
+						break;
+					default:
+						break;
+					}
+				} 
+			}
+		}
+		
+		
+		// for stratA
+		for (Map.Entry item: hashA.entrySet()) {
+			String broker = (String)item.getKey();
+			int timesPerformed = (int)item.getValue();
+			dataset.setValue(timesPerformed, broker, "Strategy-A");
+		}
+		
+		// for stratB
+		for (Map.Entry item: hashB.entrySet()) {
+			String broker = (String)item.getKey();
+			int timesPerformed = (int)item.getValue();
+			dataset.setValue(timesPerformed, broker, "Strategy-B");
+		}
+		
+		// for stratC
+		for (Map.Entry item: hashC.entrySet()) {
+			String broker = (String)item.getKey();
+			int timesPerformed = (int)item.getValue();
+			dataset.setValue(timesPerformed, broker, "Strategy-C");
+		}
+		
+		// for stratD
+		for (Map.Entry item: hashD.entrySet()) {
+			String broker = (String)item.getKey();
+			int timesPerformed = (int)item.getValue();
+			dataset.setValue(timesPerformed, broker, "Strategy-D");
+		}
+		
 
 		CategoryPlot plot = new CategoryPlot();
 		BarRenderer barrenderer1 = new BarRenderer();
@@ -219,7 +316,7 @@ public class DataVisualizationCreator {
 		CategoryAxis domainAxis = new CategoryAxis("Strategy");
 		plot.setDomainAxis(domainAxis);
 		LogAxis rangeAxis = new LogAxis("Actions(Buys or Sells)");
-		rangeAxis.setRange(new Range(1.0, 20.0));
+		rangeAxis.setRange(new Range(0.1, 20.0));
 		plot.setRangeAxis(rangeAxis);
 
 		//plot.mapDatasetToRangeAxis(0, 0);// 1st dataset to 1st y-axis
@@ -247,6 +344,7 @@ public class DataVisualizationCreator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("NUMLINES IN FILE: " + numLines);
 		String[][] summaryForTable = new String[numLines][7];
 		try {
 			Scanner summary = new Scanner(new File("summaries.txt"));
@@ -257,6 +355,7 @@ public class DataVisualizationCreator {
 				for(int i = 0; i < 7; i++) {
 					summaryForTable[counter][i] = splitLine[i];
 				}
+				counter++;
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
