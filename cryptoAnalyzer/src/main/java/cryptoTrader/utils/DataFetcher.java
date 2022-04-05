@@ -10,9 +10,19 @@ import java.util.Scanner;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
+/**
+ * This class is primarily used to fetch the current price of the coins to be used in strategy computation
+ * @author nicklam, sharon peng, nicole han, deanna chen
+ *
+ */
 public class DataFetcher {
 
+	/**
+	 * provided code that returns json file of the coin data to be searched for prices
+	 * @param id - coin 
+	 * @param date - current date
+	 * @return json file of the coin data
+	 */
 	private JsonObject getDataForCrypto(String id, String date) {
 
 		String urlString = String.format(
@@ -41,7 +51,11 @@ public class DataFetcher {
 		return null;
 	}
 	
-	
+	/**
+	 * helper method that converts the coin tickers into actual coin names for price fetching
+	 * @param id - coin ticker
+	 * @return converted string
+	 */
 	private String converter(String id) {
 		if (id.equals("BTC")) {
 			return "bitcoin";

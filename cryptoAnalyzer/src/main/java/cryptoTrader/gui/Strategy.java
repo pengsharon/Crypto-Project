@@ -3,6 +3,11 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+/**
+ * This class is mainly used to validate the strategies that are executed by the program which the user chooses
+ * @author nicklam, sharon peng, nicole han, deanna chen
+ *
+ */
 public abstract class Strategy {
 	
 	protected String[] givenCoins;
@@ -11,8 +16,20 @@ public abstract class Strategy {
 	protected String strategy;
 	protected boolean isValid;
 	
+	/**
+	 * abstract method for the trade summary 
+	 * @param priceOne - input first price
+	 * @param priceTwo - input second price
+	 * @param isValid - input validity
+	 */
 	public abstract tradeSummary performStrategy(double priceOne, double priceTwo, boolean isValid);
 	
+	/**
+	 * This method validates whether the strategy can be executed or not regarding if they have the valid coin information
+	 * @param givenCoins - coins relevant to each strategy
+	 * @param requiredCoins - coins unique to each strategy
+	 * @return if the strategies are valid or not 
+	 */
 	// universal methods
 	public boolean validate(String[] givenCoins, ArrayList<String> requiredCoins) {
 		// System.out.println(givenCoins[0] + "     " + givenCoins[1]);
@@ -33,10 +50,18 @@ public abstract class Strategy {
 		return isValid;
 	}
 	
+	/**
+	 * gets the required coins for strategy
+	 * @return requiredCoins which is the list of required coins
+	 */
 	public ArrayList<String> getReqCoins() {
 		return requiredCoins;
 	}
 	
+	/**
+	 * gets the name of the broker
+	 * @return brokerName the broker name
+	 */
 	public String getBrokerName() {
 		return brokerName;
 	}

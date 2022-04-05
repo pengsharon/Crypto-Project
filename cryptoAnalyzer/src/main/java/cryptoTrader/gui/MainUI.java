@@ -49,10 +49,13 @@ import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;    
 
+/**
+ * this class is for the main ui and for the user to interact with the numerous use cases e.g. add and remove row 
+ * @author nicklam, sharon peng, nicole han, deanna chen
+ *
+ */
 public class MainUI extends JFrame implements ActionListener {
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	private static MainUI instance;
@@ -81,6 +84,9 @@ public class MainUI extends JFrame implements ActionListener {
 		return instance;
 	}
 
+	/**
+	 * This function creates the gui for the application for the user to interact with 
+	 */
 	private MainUI() {
 
 		// Set window title
@@ -202,11 +208,19 @@ public class MainUI extends JFrame implements ActionListener {
 //		getContentPane().add(west, BorderLayout.WEST);
 	}
 
+	/**
+	 * update the stats 
+	 * @param component
+	 */
 	public void updateStats(JComponent component) {
 		stats.add(component);
 		stats.revalidate();
 	}
 
+	/**
+	 * main function to create frame
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		JFrame frame = MainUI.getInstance();
 		frame.setSize(900, 600);
@@ -215,12 +229,19 @@ public class MainUI extends JFrame implements ActionListener {
 	}
 
 	@Override
+	/**
+	 * This function executes the appropriate actions depending on what the user wants to do (button pressed)
+	 * this includes when they add rows, remove rows, click perform trade, etc.
+	 * @param e - action that was committed by user e.g. add row
+	 */
 	public void actionPerformed(ActionEvent e) {
 				
 		String command = e.getActionCommand();
 		if ("refresh".equals(command)) {
 			brokerInfo[] combinedInfo = new brokerInfo[dtm.getRowCount()];
 			ArrayList<String> coinsToFetch = new ArrayList<String>();
+			
+			// get the coins 
 			for (int count = 0; count < dtm.getRowCount(); count++){
 					String [] rowInfo = new String[3];
 					Object traderObject = dtm.getValueAt(count, 0);
@@ -241,17 +262,7 @@ public class MainUI extends JFrame implements ActionListener {
 						}
 					}
 					
-//					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");  
-//					LocalDateTime now = LocalDateTime.now();
-//					DataFetcher fetch_price = new DataFetcher();
-//					
-//					for (String s : coinsToFetch) {
-//						System.out.println("Coin is " + s + ", date is: " + dtf.format(now));
-//						double price = fetch_price.getPriceForCoin(s, dtf.format(now));
-//						System.out.println("What are we putting into the dict?: " + s + "     " + price);
-//						coinDict.put(s, price);
-//					}
-					
+					// fetch the current price of the coin for each coin in the list
 					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy");  
 					LocalDateTime now = LocalDateTime.now();
 					
@@ -447,8 +458,12 @@ public class MainUI extends JFrame implements ActionListener {
 		return uniqueBroker;
 	}
 	
+	/**
+	 * This function adds the broker/trader into a text file when the user adds a row and enters the data
+	 * @param brokerName - the name of the broker/trader that the user enters, first column 
+	 */
 	private static void writeBroker(String brokerName) {
-//		System.out.println("writeBroker entered");
+
 		try {
 		    FileWriter brokerList = new FileWriter("brokerNames.txt",true); 
 		    brokerList.write( brokerName + "\n");//appends the string to the file
@@ -458,6 +473,11 @@ public class MainUI extends JFrame implements ActionListener {
 		}
 	}
 	
+	/**
+	 * this function removes a broker if the user chooses to remove a row in the traders list
+	 * @param brokerName - broker to be deleted from list (removed row)
+	 * @param f - text file that stores the list of brokers (rows)
+	 */
 	private static void removeBroker(String brokerName, File f) {
 
         try {
@@ -470,29 +490,41 @@ public class MainUI extends JFrame implements ActionListener {
 
             while ((brokerLine = reader.readLine()) != null) {
 
-                // trim newline when comparing with lineToRemove
+                // trim newline to be compared and moved into temp file if not to be deleted
                 String trimmedLine = brokerLine.trim();
 
+                // if broker to be deleted is found, do not add into temp file
                 if (trimmedLine.equals(brokerName))
                     continue;
 
+                // add broker/trader to new file for new list
                 writer.write(brokerLine + System.getProperty("line.separator"));
             }
 
             writer.close();
             reader.close();
 
+            // rename the file for consistency
             boolean successful = tempFile.renameTo(f);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
     }
 	
+	/**
+	 * This function creates a text file to store a summary of the trades after the user wishes to 
+	 * perform trade. It stores what actions have been performed and the associated data to update the 
+	 * trading log for the user and also the histogram to display what strategies have been executed
+	 * @param summary - list of the unique data for each row/trade executed 
+	 */
 	private static void writeSummaries(ArrayList<tradeSummary> summary) {
 		File mFile = new File("summaries.txt");
+		
 		try {
 			FileWriter summaries = new FileWriter("summaries.txt",true);
+			
+			// loop through the input list to input the data into the text file 
 			for(int i = 0; i < summary.size(); i++) {
 				String brokerName = summary.get(i).getTraderName();
 				String strategy = summary.get(i).getStrategy();

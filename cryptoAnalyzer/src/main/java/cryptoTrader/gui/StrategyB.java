@@ -1,7 +1,16 @@
 package cryptoTrader.gui;
+
+/**
+ * This class is the Strategy B class that can be chosen by the user to perform after inputting the necessary coins
+ * @author nicklam, sharon peng, nicole han, deanna chen
+ *
+ */
 public class StrategyB extends Strategy {
 	
-	
+	/**
+	 * constructor 
+	 * @param brokerName - name of the broker
+	 */
 	public StrategyB(String brokerName) {
 		strategy = "Strategy-B";
 		requiredCoins.add("ETH");
@@ -10,6 +19,12 @@ public class StrategyB extends Strategy {
 		
 	}
 	
+	/**
+	 * trade summary that gets input as the necessary coin prices to compute the trading strategy and also if the coins are valid
+	 * @param ethPrice - price of ethereum for the day
+	 * @param dogePrice - price of dogecoin for the day
+	 * @param isValid - if the coins are valid for the strategy
+	 */
 	public tradeSummary performStrategy(double ethPrice, double dogePrice, boolean isValid) {
 		
 		String coin;
