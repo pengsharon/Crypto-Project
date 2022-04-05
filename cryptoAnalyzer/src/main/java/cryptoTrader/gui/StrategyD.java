@@ -1,6 +1,16 @@
 package cryptoTrader.gui;
-public class StrategyD extends Strategy{
 
+/**
+ * This class is the Strategy B class that can be chosen by the user to perform after inputting the necessary coins
+ * @author nicklam, sharon peng, nicole han, deanna chen
+ *
+ */
+public class StrategyD extends Strategy{
+	
+	/**
+	 * constructor 
+	 * @param brokerName - name of the broker
+	 */
 	public StrategyD(String brokerName) {
 		strategy = "Strategy-D";
 		requiredCoins.add("DOGE");
@@ -9,6 +19,12 @@ public class StrategyD extends Strategy{
 	}
 	
 	@Override
+	/**
+	 * trade summary that gets input as the necessary coin prices to compute the trading strategy and also if the coins are valid
+	 * @param dogePrice - price of dogecoin for the day
+	 * @param trx - price of tron for the day
+	 * @param isValid - if the coins are valid for the strategy
+	 */
 	public tradeSummary performStrategy(double dogePrice, double trxPrice, boolean isValid) {
 		
 		String coin;

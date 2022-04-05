@@ -8,6 +8,11 @@
 
 package cryptoTrader.gui;
 
+/**
+ * This class contains the info for the broker that the user inputs
+ * @author nicklam, sharon peng, nicole han, deanna chen
+ *
+ */
 public class brokerInfo {
 	
 	private String brokerName;

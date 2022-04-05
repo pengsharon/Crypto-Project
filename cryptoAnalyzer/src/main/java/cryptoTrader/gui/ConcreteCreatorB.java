@@ -9,6 +9,11 @@
 
 package cryptoTrader.gui;
 
+/**
+ * this class is used as the concrete creator in the factory method for strategy B
+ * @author nicklam, sharon peng, nicole han, deanna chen
+ *
+ */
 public class ConcreteCreatorB extends Creator{
 	
 	/**
@@ -17,7 +22,6 @@ public class ConcreteCreatorB extends Creator{
 	* @param brokerName the name of the broker
 	* @return Strategy the specific strategy to create 
 	*/
-	
 	public Strategy factoryMethod(String brokerName) {
 		return new StrategyB(brokerName);
 	}

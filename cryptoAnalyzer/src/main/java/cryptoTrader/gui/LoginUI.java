@@ -33,15 +33,13 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-
 /**
-* The LoginUI class allows users to input info, verify credentials, 
-* and display the mainUI 
-*/
+ * This class implements the login ui that the user interacts with to log into the program to display the main ui
+ * @author nicklam, sharon peng, nicole han, deanna chen
+ *
+ */
 public class LoginUI extends JFrame implements ActionListener {
-	/**
-	 * Class create a Login window to validate user based on name and password
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel loginPanel;
@@ -127,6 +125,7 @@ public class LoginUI extends JFrame implements ActionListener {
 	@Override
 	/**
 	 * Evaluate credentials through "submit button"
+	 * @param e - action that is being performed
 	 */
 	public void actionPerformed(ActionEvent e) {
 		
