@@ -332,6 +332,10 @@ public class DataVisualizationCreator {
 		MainUI.getInstance().updateStats(chartPanel);
 	}
 	
+	/**
+	 * Private helper method for turning text file into Object[][] for table
+	 * @return Object [][] information of all historic trades
+	 */
 	private Object[][] summaryToTable() {
 		int numLines = 0;
 		try {
