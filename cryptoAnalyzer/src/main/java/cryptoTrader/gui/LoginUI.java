@@ -1,3 +1,12 @@
+/**
+* The LoginUI adopts the sample code provided in class
+* to display the UI of the login page
+*
+* @author  Deanna Chen, Nicole Han, Nick Lam, Sharon Peng
+* @version 1.0
+* @since   2014-03-31 
+*/
+
 package cryptoTrader.gui;
 
 import java.awt.BorderLayout;
@@ -67,8 +76,7 @@ public class LoginUI extends JFrame implements ActionListener {
 	 */
 	public LoginUI() {
 
-		// Set window title
-		super("Login Window");
+		super("Crypto Trading Tool");
 
 		loginPanel = new JPanel();
 		loginPanel.setLayout(new GridLayout(3, 2));

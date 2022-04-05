@@ -1,3 +1,11 @@
+/**
+* The brokerInfo program implements a class that sets and returns deatils about each broker
+*
+* @author  Deanna Chen, Nicole Han, Nick Lam, Sharon Peng
+* @version 1.0
+* @since   2014-03-31 
+*/
+
 package cryptoTrader.gui;
 
 /**
@@ -12,11 +20,12 @@ public class brokerInfo {
 	private String[] coinList;
 	
 	/**
-	 * Constructor defining the data with with the associated brokerName (row)
-	 * @param brokerName - name of the broker
-	 * @param coinList - list of the coins inputted
-	 * @param stratName - strategy chosen
-	 */
+	* The constructor of the class brokerInfo
+	*
+	* @param brokerName the string to set as the brokerName
+	* @param coinList a String array that stores the coins associated with the broker
+	* @param stratName the name of the strategy
+	*/
 	public brokerInfo(String brokerName, String[] coinList, String stratName) {
 		this.brokerName = brokerName;
 		this.coinList = coinList;
@@ -24,25 +33,22 @@ public class brokerInfo {
 	}
 	
 	/**
-	 * gets the broker name
-	 * @return broker name
-	 */
+	* @return brokerName the name of the broker
+	*/
 	public String getBName() {
 		return brokerName;
 	}
 	
 	/**
-	 * gets the list of coins
-	 * @return the coin list
-	 */
+	* @return coinList String array that stores the list of coins associated with the broker
+	*/
 	public String[] getCoinList() {
 		return coinList;
 	}
 	
 	/**
-	 * gets the strategy chosen
-	 * @return strategy (A - D)
-	 */
+	* @return stratName strategy name
+	*/
 	public String getStratName() {
 		return stratName;
 	}

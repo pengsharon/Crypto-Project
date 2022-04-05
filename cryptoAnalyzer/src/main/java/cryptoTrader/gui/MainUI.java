@@ -1,3 +1,11 @@
+/**
+* The MainUI displays the interface for trading
+*
+* @author  Deanna Chen, Nicole Han, Nick Lam, Sharon Peng
+* @version 1.0
+* @since   2014-03-31 
+*/
+
 package cryptoTrader.gui;
 
 import java.awt.BorderLayout;
@@ -266,7 +274,7 @@ public class MainUI extends JFrame implements ActionListener {
 					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy");  
 					LocalDateTime now = LocalDateTime.now();
 					
-					System.out.println(dtf.format(now));
+//					System.out.println(dtf.format(now));
 					DataFetcher fetch_price = new DataFetcher();
 					
 					for (String s : coinsToFetch) {
@@ -293,12 +301,12 @@ public class MainUI extends JFrame implements ActionListener {
 					combinedInfo[count] = thisBroker;
 	        }
 			
-			System.out.println(combinedInfo[0].getBName());
-			System.out.println(combinedInfo[0].getCoinList());
-			System.out.println(combinedInfo[0].getStratName());
-			for(int i = 0; i < coinsToFetch.size(); i++) {
-				System.out.println(coinsToFetch.get(i));
-			}
+//			System.out.println(combinedInfo[0].getBName());
+//			System.out.println(combinedInfo[0].getCoinList());
+//			System.out.println(combinedInfo[0].getStratName());
+//			for(int i = 0; i < coinsToFetch.size(); i++) {
+//				System.out.println(coinsToFetch.get(i));
+//			}
 			
 			// assuming we have a dict (hashmap) of coins and prices fetched. (coinDict)
 			
@@ -339,7 +347,11 @@ public class MainUI extends JFrame implements ActionListener {
 				if (strategies[i] != null) {
 					Strategy brokerStrat = strategies[i].factoryMethod(brokerName);
 					isValid = brokerStrat.validate(coinsGiven, brokerStrat.getReqCoins());
-					mySummary = brokerStrat.performStrategy(coinDict.get(brokerStrat.getReqCoins().get(0)), coinDict.get(brokerStrat.getReqCoins().get(1)), isValid);
+					if (isValid) {
+						mySummary = brokerStrat.performStrategy(coinDict.get(brokerStrat.getReqCoins().get(0)), coinDict.get(brokerStrat.getReqCoins().get(1)), isValid);
+					} else {
+						mySummary = new tradeSummary(brokerName, strategyUsed, "null", "fail", "null", "null");
+					}
 					allTrades.add(mySummary);
 				}
 				
