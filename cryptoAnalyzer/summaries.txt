@@ -1,2 +1,1 @@
-sharon,Strategy-C,XRP,Buy,50,1.06,2022-04-04
-d,Strategy-A,BTC,Sell,1,58172.57,2022-04-04
+Trader-A,Strategy-A,BTC,Sell,1,0.00,2022-04-05

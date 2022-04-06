@@ -271,7 +271,7 @@ public class MainUI extends JFrame implements ActionListener {
 					}
 					
 					// fetch the current price of the coin for each coin in the list
-					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy");  
+					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-mm-yyyy");  
 					LocalDateTime now = LocalDateTime.now();
 					
 //					System.out.println(dtf.format(now));
