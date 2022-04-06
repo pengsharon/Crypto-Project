@@ -1,1 +1,1 @@
-Trader-A,Strategy-A,BTC,Sell,1,0.00,2022-04-05
+hi,Strategy-A,BTC,Sell,1,58230.97,2022-04-05
