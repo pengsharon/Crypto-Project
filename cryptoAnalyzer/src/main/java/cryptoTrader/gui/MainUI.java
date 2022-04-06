@@ -271,11 +271,12 @@ public class MainUI extends JFrame implements ActionListener {
 					}
 					
 					// fetch the current price of the coin for each coin in the list
-					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-mm-yyyy");  
+					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");  
 					LocalDateTime now = LocalDateTime.now();
 					
 //					System.out.println(dtf.format(now));
 					DataFetcher fetch_price = new DataFetcher();
+					System.out.println("Date: " + dtf.format(now));
 					
 					for (String s : coinsToFetch) {
 						double price = fetch_price.getPriceForCoin(s, dtf.format(now));
